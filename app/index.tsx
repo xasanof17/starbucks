@@ -1,5 +1,10 @@
 import { StatusBar } from "expo-status-bar";
-import { Platform, StyleSheet, useWindowDimensions } from "react-native";
+import {
+  Platform,
+  StyleSheet,
+  TouchableOpacity,
+  useWindowDimensions,
+} from "react-native";
 import { Text, View } from "../components/Themed";
 import { Image } from "expo-image";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -8,6 +13,7 @@ import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
 } from "react-native-reanimated";
+import Button from "../widgets/Button";
 
 const blurhash =
   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
@@ -39,7 +45,6 @@ export default function OnBoardingScreen() {
   const onScroll = useAnimatedScrollHandler({
     onScroll: (event) => {
       x.value = event.contentOffset.x;
-      // console.log(event.contentOffset.x);
     },
   });
 
@@ -47,15 +52,15 @@ export default function OnBoardingScreen() {
     return (
       <View style={[styles.container, { width: ScreenWidth }]}>
         <Image
-          style={{ width: ScreenWidth, height: 400 }}
+          style={{ width: ScreenWidth, height: 340 }}
           source={item.image}
           placeholder={blurhash}
-          contentFit="cover"
+          contentFit="contain"
           transition={200}
         />
         <View style={{ paddingHorizontal: 15 }}>
           <Text style={styles.title}>
-            <Text style={{ color: "#00623B" }}>Good Coffee</Text> Good Moods
+            <Text style={{ color: "#00623B" }}>Coffee</Text> Good Moods
           </Text>
           <Text
             style={{
@@ -63,11 +68,26 @@ export default function OnBoardingScreen() {
               fontFamily: "PoppinsRegular",
               fontWeight: "400",
               color: "black",
-              marginVertical: 30,
+              marginVertical: 20,
             }}
           >
             {item.text}
           </Text>
+          <View style={{ alignItems: "center", justifyContent: "center" }}>
+            <Button title="Get Started" />
+            <Text
+              style={{
+                color: "gray",
+                fontFamily: "PoppinsMedium",
+                fontSize: 18,
+                fontWeight: "500",
+                marginTop: 20,
+              }}
+            >
+              Already have account ?{" "}
+              <Text style={{ color: "#00623B" }}>Log In</Text>
+            </Text>
+          </View>
         </View>
       </View>
     );
