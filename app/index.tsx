@@ -2,7 +2,6 @@ import { StatusBar } from "expo-status-bar";
 import {
   Platform,
   StyleSheet,
-  TouchableOpacity,
   useWindowDimensions,
 } from "react-native";
 import { Text, View } from "../components/Themed";
