@@ -1,6 +1,6 @@
 # Starbucks Clone App
 
-![Logo]("./assets/images/readme.png")
+![Logo]("https://github.com/xasanof17/starbucks/blob/master/assets/images/readme.png")
 
 ## Overview
 
