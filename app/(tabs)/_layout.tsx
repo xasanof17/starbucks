@@ -8,6 +8,7 @@ export default function TabLayout() {
 
   return (
     <Tabs
+      initialRouteName="index"
       tabBar={CustomTabBar}
       screenOptions={{
         tabBarShowLabel: false,
