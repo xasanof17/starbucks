@@ -10,6 +10,7 @@ export default function TabLayout() {
     <Tabs
       tabBar={CustomTabBar}
       screenOptions={{
+        tabBarShowLabel: false,
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
       }}
     >

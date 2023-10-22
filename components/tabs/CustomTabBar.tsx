@@ -1,17 +1,13 @@
 import { FC } from "react";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { View } from "../Themed";
-import { Pressable, StyleSheet, useWindowDimensions } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 import {
   Feather,
   MaterialCommunityIcons,
   SimpleLineIcons,
   Ionicons,
 } from "@expo/vector-icons";
-import Animated, {
-  useAnimatedStyle,
-  withSpring,
-} from "react-native-reanimated";
 
 type BottomTabIcon = {
   route: string;
@@ -43,8 +39,6 @@ const BottomTabIcon: FC<BottomTabIcon> = ({ route, isFocused }) => {
         return (
           <SimpleLineIcons name="location-pin" size={size} color={iconColor} />
         );
-      default:
-        break;
     }
   };
   return (
@@ -59,30 +53,8 @@ const CustomTab: FC<BottomTabBarProps> = ({
   descriptors,
   navigation,
 }) => {
-  const { width } = useWindowDimensions();
-  const margin = 20;
-  const tabBarWidth = width - 2 * margin;
-  const tabWidth = tabBarWidth / state.routes.length;
-
-  const translateAnimation = useAnimatedStyle(() => {
-    return {
-      transform: [{ translateX: withSpring(tabWidth * state.index) }],
-    };
-  });
-
   return (
-    <View
-      style={[styles.tabBarContainer, { width: tabBarWidth, bottom: margin }]}
-    >
-      <Animated.View
-        style={[
-          styles.slidingTabContainer,
-          { width: tabWidth },
-          translateAnimation,
-        ]}
-      >
-        <View style={styles.slidingTab} />
-      </Animated.View>
+    <View style={styles.tabBarContainer}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
 
@@ -96,7 +68,6 @@ const CustomTab: FC<BottomTabBarProps> = ({
           });
 
           if (!isFocused && !event.defaultPrevented) {
-            // The `merge: true` option makes sure that the params inside the tab screen are preserved
             navigation.navigate(route.name, { merge: true });
           }
         };
@@ -133,33 +104,17 @@ const CustomTabBar: FC<BottomTabBarProps> = (props) => {
 
 const styles = StyleSheet.create({
   tabBarContainer: {
-    flex: 1,
     flexDirection: "row",
-    height: 70,
-    position: "absolute",
+    height: 60,
     alignSelf: "center",
-    backgroundColor: "#000001",
+    backgroundColor: "#fff",
     borderRadius: 100,
     alignItems: "center",
     justifyContent: "space-between",
     overflow: "hidden",
-  },
-  contentContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#eee",
-  },
-  slidingTabContainer: {
-    ...StyleSheet.absoluteFillObject,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  slidingTab: {
-    width: 70,
-    height: 70,
-    borderRadius: 100,
-    backgroundColor: "#eee",
+    bottom: 20,
+    paddingHorizontal: 10,
+    marginHorizontal: 20,
   },
 });
 
